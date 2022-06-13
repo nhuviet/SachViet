@@ -1,0 +1,56 @@
+﻿@model MyCart
+<div class="">
+    @*@if (Model.Lines.Count() > 0)
+        {
+            <small class="navbar-text">
+                <b>Giỏ hàng: </b>
+                @if (Model.Lines.Sum(x => x.Quantity) >= 2)
+                {
+                    <text>@Model.Lines.Sum(x => x.Quantity) books</text>
+                }
+                else
+                {
+                    <text>@Model.Lines.Sum(x => x.Quantity) book</text>
+                }
+            </small>
+        }*@
+    <a class="btn btn-sm btn-info navbar-btn"
+       asp-page="/MyCart"
+       asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
+        <i class="fa fa-shopping-cart"></i>
+    </a>
+    @if (Model.Lines.Count() >= 0)
+    {
+        <small class="navbar-text cartsummarynum">
+            @if (Model.Lines.Sum(x => x.Quantity) >= 2)
+            {
+                <p>@Model.Lines.Sum(x => x.Quantity)</p>
+            }
+            else
+            {
+                <p>@Model.Lines.Sum(x => x.Quantity)</p>
+            }
+
+        </small>
+    }
+
+</div>
+
+<style>
+    .cartsummarynum {
+        background-color: red;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 2px;
+        top: -6px;
+    }
+    .cartsummarynum p{
+        color:white;
+        font-size:12px;
+        position: relative;
+        top: -8px;
+        left: -7px;
+    }
+</style>

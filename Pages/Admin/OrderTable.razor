@@ -1,0 +1,70 @@
+﻿
+<table class="table table-sm table-striped table-bordered">
+
+    <thead>
+        <tr><th colspan="5" class="text-center">@TableTitle</th></tr>
+    </thead>
+
+    <tbody>
+        @if (Orders?.Count() > 0)
+        {
+            @foreach (Order o in Orders)
+            {
+                <tr>
+                    <td>@o.OrderID</td>
+                    <td>@o.Name</td>
+                    <th>Tên sách</th>
+                    <th>Số lượng</th>
+                    <td>
+                        @*<button class="btn btn-sm btn-danger"
+                                @onclick="@(e => OrderSelected.InvokeAsync(o.OrderID))">
+                            @ButtonLabel
+                        </button>*@
+                        @if (o.Shipped == false)
+                        {
+                            <button class="btn btn-sm btn-danger"
+                                    @onclick="@(e => OrderSelected.InvokeAsync(o.OrderID))">
+                                @ButtonLabel
+                            </button>
+                        }
+                        @if (o.Shipped == true)
+                        {
+                            <div class="text-success">Đã giao</div>
+                        }
+                    </td>
+                </tr>
+                @foreach (CartLine line in o.Lines)
+                {
+                    <tr>
+                        <td colspan="2"></td>
+                        <td>@line.Book.Title</td>
+                        <td>@line.Quantity</td>
+                        <td></td>
+                    </tr>
+                }
+
+            }
+
+        }
+        else
+        {
+            <tr><td colspan="5" class="text-center">Hiện tại không có đơn hàng</td></tr>
+        }
+
+    </tbody>
+
+</table>
+
+
+@code {
+    [Parameter]
+    public string TableTitle { get; set; } = "Đơn Hàng";
+    [Parameter]
+    public string ButtonLabel { get; set; } = "Ship";
+
+    [Parameter]
+    public IEnumerable<Order> Orders { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OrderSelected { get; set; }
+}

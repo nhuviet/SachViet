@@ -1,0 +1,40 @@
+﻿@using SachViet.MyTagHelper;
+@model Book
+@{var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");}
+
+
+<div class="card" style="width: 100%;">
+
+    <div class="row m-1 p-1">
+        <div class="col-9">
+            <div class="card-body">
+                <h5 class="card-title">
+                    @Model.Title
+                    <span class="badge badge-pill badge-primary">
+                        <small>@String.Format(format, "{0:c0}", Model.Price * 1000)</small>
+                    </span>
+                </h5>
+
+                <form id="@Model.BookID" asp-page="/MyCart" method="post">
+                    <input type="hidden" asp-for="BookID" />
+                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                    <div class="card-text p-1">
+                        <h6 class="card-subtitle mb-2 text-muted">@Model.Genre</h6>
+                        <p class="card-text">@Model.Description</p>
+                        <hr />
+                        <button type="submit" class="btn btn-warning btn-sm pull-right">Mua sách</button>
+                        <button type="reset" class="btn btn-warning btn-sm pull-right" onclick="rent()">Thuê sách</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="justify-content-center">
+                <img src="@Model.ImgPath" alt="Img" height="240" />
+            </div>
+
+        </div>
+    </div>
+
+</div>

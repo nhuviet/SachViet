@@ -1,0 +1,37 @@
+﻿@page "/admin/books/details/{id:long}"
+@{var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");}
+
+<div style="height:40px;"></div>
+<div class="row m-1 p-1">
+    <div class="col-3">
+        <img src="@Book.ImgPath" alt="Img" height="240" />
+    </div>
+    <div class="col-9">
+        <table class="table table-sm table-bordered table-striped">
+            <tbody>
+                <tr><th>ID</th><td>@Book.BookID</td></tr>
+                <tr><th>Tên sách</th><td><h4>@Book.Title</h4></td></tr>
+                <tr><th>Tác giả</th><td>@Book.Author</td></tr>
+                <tr><th>Mô tả</th><td>@Book.Description</td></tr>
+                <tr><th>Thể loại</th><td>@Book.Genre</td></tr>
+                <tr><th>Giá</th><td>@String.Format(format, "{0:c0}", Book.Price * 1000)</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<NavLink class="btn btn-warning" href="@EditUrl">Chỉnh sửa</NavLink>
+<NavLink class="btn btn-secondary" href="/admin/books">Quay lại</NavLink>
+
+
+@code {
+    [Inject]
+    public IBooksLibRepository Repository { get; set; }
+    [Parameter]
+    public long Id { get; set; }
+    public Book Book { get; set; }
+    protected override void OnParametersSet()
+    {
+        Book = Repository.Books.FirstOrDefault(b => b.BookID == Id);
+    }
+    public string EditUrl => $"/admin/books/edit/{Book.BookID}";
+}

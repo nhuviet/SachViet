@@ -1,0 +1,29 @@
+﻿@inherits LayoutComponentBase
+
+<div class="bg-dark text-white p-2">
+    <span><a asp-action="Index" asp-controller="Home" asp-route-genre=""><img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/admin-book-5-1111214.png" height="52" /></a></span>
+    <span class="navbar-brand ml-2">BOOK LIBRARY -</span>
+    <span>Administrator</span>
+</div>
+
+<div class="container-fluid">
+    <div class="row p-2">
+        <div class="col-3">
+            <NavLink class="btn btn-outline-primary btn-block"
+                     href="/admin/books"
+                     ActiveClass="btn-primary text-white"
+                     Match="NavLinkMatch.Prefix">
+                Sách
+            </NavLink>
+            <NavLink class="btn btn-outline-primary btn-block"
+                     href="/admin/OrderAdmin"
+                     ActiveClass="btn-primary text-white"
+                     Match="NavLinkMatch.Prefix">
+                Đơn hàng
+            </NavLink>
+        </div>
+        <div class="col">
+            @Body
+        </div>
+    </div>
+</div>

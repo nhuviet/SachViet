@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SachViet</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <div class="bg-wood text-white p-2">
+            <div class="container-fluid">
+                <div class="row">
+                    <span><a asp-action="Index" asp-controller="Home" asp-route-genre=""><img src="~/images/book.png" height="52" /></a></span>
+                    <div class="col navbar-brand">SÁCH VIỆT</div>
+                    <div class="col-6 text-right">
+                        <vc:cart-summary />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-1 p-1">
+            <div id="genres" class="col-3">
+                <p>
+                    Trang web đặt sách và thuê sách trực tuyến. Hợp tác cùng Thư viện thành phố nha trang và các nhà sách tỉnh thành Khánh hòa giúp mua và đặt lịch thuê sách dễ dàng, tiện lợi.
+                </p>
+                <p>
+                    Sách việt, nâng tầm tri thức việt
+                </p>
+                <vc:genre-navigation />
+            </div>
+
+            <div class="col-9">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+
+    @*<footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - SachViet - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>*@
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

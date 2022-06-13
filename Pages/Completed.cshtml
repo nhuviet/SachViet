@@ -1,0 +1,16 @@
+﻿@page
+<div class="text-center">
+    <h3>Cảm ơn đã mua hàng - Thank for shopping</h3>
+    <p>Chúng tôi sẽ cố gắng giao sách đến cho bạn nhanh nhất có thể</p>
+    <p>Cảm ơn đã chờ đợi ♥</p>
+    
+    <img src="~/images/thanks.png" height="200"/>
+</div>
+<div class="text-center">
+    <a class="btn btn-info" asp-controller="Home">Trở về cửa hàng</a>
+</div>
+
+@functions {
+    [BindProperty(SupportsGet = true)]
+    public string OrderId { get; set; }
+}

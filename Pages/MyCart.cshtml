@@ -1,0 +1,45 @@
+﻿@page
+@model MyCartModel
+<h2>Giỏ Hàng</h2>
+<table class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th></th>
+            <th>Số lượng</th>
+            <th>Tên sách</th>
+            <th class="text-right">Giá</th>
+            <th class="text-right"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.myCart.Lines)
+        {
+            <tr>
+                <td class="text-center"><img src="@line.Book.ImgPath" width="50" /></td>
+                <td class="text-center">@line.Quantity</td>
+                <td class="text-left">@line.Book.Title</td>
+                <td class="text-right">@line.Book.Price.ToString("c")</td>
+                <td class="text-right">@((line.Quantity * line.Book.Price).ToString("c"))</td>
+                <td class="text-center">
+                    <form asp-page-handler="Remove" method="post">
+                        <input type="hidden" name="BookID" value="@line.Book.BookID" />
+                        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                        <button type="submit" class="btn btn-sm btn-danger">Hủy</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Tổng tiền</td>
+            <td class="text-right">
+                @Model.myCart.ComputeTotalValue().ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<div class="text-center">
+    <a class="btn btn-info" href="@Model.ReturnUrl">Trở lại</a>
+    <a class="btn btn-info" asp-action="Checkout" asp-controller="Order">Thanh toán</a>
+</div>
